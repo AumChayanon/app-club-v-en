@@ -4,7 +4,7 @@
       <Menu />
     </div>
     <div class="div_about">
-      <h1 style="color: #123B8E;">คะแนนของผู้เล่น</h1>
+      <h1 style="color: #123b8e">คะแนนของผู้เล่น</h1>
       <carousel
         :auto-play-direction="forward"
         :pagination-enabled="false"
@@ -37,6 +37,7 @@
             class="button_about button3"
             id="status_load"
             style="border-radius: 50%; width: 3rem; height: 3rem"
+            v-on:click="error"
           >
             <img src="../assets/warning.svg" alt="Kiwi standing on oval" />
           </div>
@@ -47,6 +48,7 @@
             class="button_about button3"
             id="status_load"
             style="border-radius: 50%; width: 3rem; height: 3rem"
+            v-on:click="history"
           >
             <img src="../assets/history.svg" alt="Kiwi standing on oval" />
           </div>
@@ -61,6 +63,14 @@
         <div style="text-align: left"><h3>Maximus</h3></div>
         <Max :data="this.dataMax" />
       </div>
+      <div v-if="this.status === 'error'">
+        <div style="text-align: left"><h3>Error</h3></div>
+        <Error :data="this.dataError" />
+      </div>
+      <div v-if="this.status === 'error'">
+        <div style="text-align: left"><h3>History</h3></div>
+        <History :data="this.dataHistory" />
+      </div>
     </div>
   </div>
 </template>
@@ -70,6 +80,8 @@ import Menu from "../components/Menu";
 import { Carousel, Slide } from "vue-carousel";
 import Today from "../components/Today";
 import Max from "../components/Max";
+import Error from "../components/Error"
+import History from "../components/History"
 var database = firebase.database();
 export default {
   components: {
@@ -78,6 +90,8 @@ export default {
     Slide,
     Today,
     Max,
+    Error,
+    History
   },
   data() {
     return {
@@ -85,6 +99,8 @@ export default {
       status: "today",
       datatoday: [],
       dataMax: [],
+      dataError: [],
+      dataHistory:[]
     };
   },
   async created(){
@@ -157,6 +173,35 @@ export default {
       await this.dataMax.sort((t1, t2) => (t1.all > t2.all ? -1 : 1));
       await console.log("this.dataMax",this.dataMax);
     },
+    async computeError() {
+      var dataUsers = database.ref("/Users/");
+      var user = [];
+      this.dataError = [];
+      await dataUsers.on("child_added", (snapshot) => {
+        user.push(snapshot.val());
+        // console.log("user",snapshot.val())
+      });
+      for (let i = 0; i < user.length; i++) {
+        var dataRef = database.ref("/PersonalData/" + user[i].uid +"/");
+        var serviceError = 0;
+        var uid = "";
+        dataRef.on("child_added", (snapshot) => {
+          serviceError = snapshot.val().serviceError + serviceError;
+          uid = snapshot.val().uid
+        });
+        var d = {
+          serviceError: serviceError,
+          name: user[i].name,
+          uid:uid,
+          photo: user[i].photo,
+        };
+        if(uid === user[i].uid){
+          this.dataError.push(d);
+        }
+      }
+      await this.dataError.sort((t1, t2) => (t1.serviceError > t2.serviceError ? -1 : 1));
+      await console.log("this.dataError",this.dataError);
+    },
     today() {
       this.status = "today";
     },
@@ -164,6 +209,38 @@ export default {
       this.status = "max";
       this.computeMax();
     },
+    error(){
+      this.status = "error";
+      this.computeError();
+    },
+    async history(){
+      this.status = "error";
+      var dataUserHis = [];
+      this.dataHistory = []
+      var today = new Date();
+      var count = -1;
+      for (let i = 0; i < 3; i++) {
+        var afterDay = new Date(today.setDate(today.getDate() - i))
+        var date = afterDay.getMonth() + 1 + ":" + afterDay.getDate() + ":" + afterDay.getFullYear();
+        // console.log(date);
+
+        var dataRef = database.ref("/DataToDay/" + date + "/");
+        await dataRef.on("child_added", (snapshot) => {
+          console.log(date);
+          if (snapshot.val().status === "start") {
+            dataUserHis = [];
+            count = count + 1;
+          } else {
+            count = count + 0;
+          }
+          dataUserHis.push(snapshot.val());
+          this.dataHistory[count] = dataUserHis;
+        });
+        console.log(this.dataHistory);
+
+      }
+
+    }
   },
 };
 </script>

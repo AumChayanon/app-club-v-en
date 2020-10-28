@@ -5,7 +5,7 @@
     <router-link to="/home" style="color: #474747"><p>หน้าหลัก</p></router-link>
   </li>
   <li class="nav-item">
-      <router-link to="/about" style="color: #474747"><p>อันดับ</p></router-link>
+      <router-link to="/about" style="color: #474747"><p>คะแนน</p></router-link>
   </li>
   <li class="nav-item">
     <router-link to="/people" style="color: #474747"><p>สมาชิก</p></router-link>
