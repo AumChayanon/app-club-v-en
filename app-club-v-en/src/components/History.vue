@@ -1,8 +1,9 @@
 <template>
   <div class="div_his">
-    <div class="row" v-for="(item, count) in data" :key="item.id">
-      <h5> set: {{ count + 1 }}</h5>
+    
+    <div class="row" v-for="item in data" :key="item.id">
       <br />
+      <p>{{item[0].date}}</p>
       <div class="row" id="divToday" v-for="index in item" :key="index.id">
         <div class="col" style="max-width:20%;">
           <img
@@ -44,7 +45,7 @@
           </slide>
         </carousel>
       </div>
-      <hr>
+      
     </div>
   </div>
 </template>

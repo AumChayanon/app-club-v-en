@@ -91,7 +91,7 @@ export default {
     });
     this.graphWeight() 
     this.getData()
-    await console.log(this.datapro);
+    //console.log(this.datapro);
   },methods: {
       async getData(){
           var dataRef = database.ref("/PersonalData/" + this.dataUid + "/");
@@ -117,8 +117,8 @@ export default {
         await this.potential.push(digs)
         await this.potential.push(aces)
         await this.potential.push(serviceError)
-        await console.log(this.allData);
-        await this.graphWeight() 
+        await //console.log(this.allData);
+        setTimeout(() => this.graphWeight() , 2000);
       },
       logout() {
       firebase

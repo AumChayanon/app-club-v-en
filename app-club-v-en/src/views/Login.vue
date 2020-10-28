@@ -73,7 +73,7 @@ export default {
 .bg-image{
 height: 100%;
   background-image: url("../assets/bgm.png");
-  /* filter: brightness(0.40) blur(3px); */
+  /* filter: brightness(0.60) blur(3px); */
 
   /* Center and scale the image nicely */
   background-position: center;

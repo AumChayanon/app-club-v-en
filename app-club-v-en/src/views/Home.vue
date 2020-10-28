@@ -210,13 +210,13 @@ export default {
      this.num_page = num
     }
 
-    console.log("num_page", this.num_page );
+    //console.log("num_page", this.num_page );
     setTimeout(() => this.gatSevDay(status), 3000);
   },
   methods: {
     gatSevDay(status) {
       var dataRef = database.ref("/Users/");
-      console.log("status", status);
+      //console.log("status", status);
       if (status === 0) {
         dataRef.push({
           name: this.dataUser.displayName,
@@ -227,7 +227,7 @@ export default {
       }
     },
     test() {
-      console.log("partUser", this.partUser);
+      //console.log("partUser", this.partUser);
     },
 
     selectUser(e) {
@@ -235,12 +235,12 @@ export default {
         if (this.dataUserSelect.includes(e) === false) {
           this.dataUserSelect.push(e);
         }
-        console.log(this.dataUserSelect.includes(e));
+        //console.log(this.dataUserSelect.includes(e));
       } else {
         this.dataUserSelect.push(e);
       }
 
-      console.log("uid: ", this.dataUserSelect);
+      //console.log("uid: ", this.dataUserSelect);
     },
     userSelected() {
       this.user_Selected = [];
@@ -258,7 +258,7 @@ export default {
           serviceError: 0,
         });
       }
-      console.log(this.user_Selected);
+      //console.log(this.user_Selected);
       this.status_btn_userSelected = "close"
       this.status_div_showAllUser = "close"
     },
@@ -270,7 +270,7 @@ export default {
       //   confirmButtonColor: "rgb(126, 199, 66)",
       //   confirmButtonText: "ยกเลิก",
       // })
-      console.log("ลบผู้เล่นไม่ได้");
+      //console.log("ลบผู้เล่นไม่ได้");
       }
       else{
         Swal.fire({
@@ -285,9 +285,9 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           const del = this.dataUserSelect.find((mgs) => mgs.uid == e);
-          console.log("del", del);
+          //console.log("del", del);
           const index = this.dataUserSelect.indexOf(del);
-          console.log("index", index);
+          //console.log("index", index);
           this.dataUserSelect.splice(index, 1);
           Swal.fire("ลบสำเร็จ!", "ลบตัวผู้เล่นที่คุณเลือกสำเร็จ.", "success");
         }
@@ -359,7 +359,7 @@ export default {
 
 
 
-      // console.log("save",this.user_Selected);
+      // //console.log("save",this.user_Selected);
       this.dataUserSelect = [],
       this.user_Selected = []
       this.status_btn_userSelected="default"
