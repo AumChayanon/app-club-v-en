@@ -4,7 +4,7 @@
       <Menu />
     </div>
     <div class="div_about">
-      <h1>คะแนนของผู้เล่น</h1>
+      <h1 style="color: #123B8E;">คะแนนของผู้เล่น</h1>
       <carousel
         :auto-play-direction="forward"
         :pagination-enabled="false"
@@ -106,8 +106,8 @@ export default {
       this.datatoday[count] = dataUserToday;
     });
     console.log(this.datatoday);
-    
-    
+
+
   },
   methods: {
     async computeMax() {

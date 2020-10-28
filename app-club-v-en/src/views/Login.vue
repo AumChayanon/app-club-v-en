@@ -43,7 +43,7 @@ export default {
 .div_login {
   text-align: center;
   margin: 0;
-  height: 100%; 
+  height: 100%;
 }
 .center {
   padding: auto;
@@ -51,9 +51,11 @@ export default {
 }
 .btn {
   width: 80%;
-  background-color: rgb(126, 199, 66); /* Green */
+  /* background-color: rgb(126, 199, 66);  */
+  background-color: rgb(255, 255, 255); /* Green */
   border: none;
-  color: rgb(255, 255, 255);
+  /* color: rgb(255, 255, 255); */
+  color: rgb(41, 41, 41);
   padding: 16px;
   text-align: center;
   text-decoration: none;
@@ -65,9 +67,9 @@ export default {
   z-index: 2;
 }
 .bg-image{
-height: 100%;  
-  background-image: url("../assets/bg.jpg");
-  filter: brightness(0.40) blur(3px);
+height: 100%;
+  background-image: url("../assets/bgm.png");
+  /* filter: brightness(0.40) blur(3px); */
 
   /* Center and scale the image nicely */
   background-position: center;
@@ -86,5 +88,17 @@ h1{
   z-index: 2;
   width: 100%;
   text-align: center;
+}
+@media only screen and (max-width: 1024px) {
+  .bg-image{
+height: 100%;
+  background-image: url("../assets/bg.png");
+  /* filter: brightness(0.40) blur(3px); */
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 }
 </style>

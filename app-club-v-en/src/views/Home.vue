@@ -4,8 +4,9 @@
       <Menu />
     </div>
     <div class="div_home">
+
       <div>
-        <h3>Club Volleyball EN</h3>
+        <h2 style="color: #123B8E;">Club Volleyball EN</h2>
       </div>
       <div v-if="status_div_showAllUser === 'default'" style="text-align: left; padding-top: 10px">
         <b>เลือกตัวผู้เล่น </b>
@@ -63,13 +64,13 @@
           v-if="this.status_btn_userSelected === 'default'"
         >
           ตกลง
-        </button>        
+        </button>
       </div>
       <div v-if="this.user_Selected.length > 0">
         <div style="text-align: left;">
 <b>เริ่มเก็บข้อมูลผู้เล่น</b>
         </div>
-        
+
         <div
           class="row"
           id="divOneUesr"
@@ -140,13 +141,18 @@
           <a v-on:click="cancel">ยกเลิก</a>
         </div>
       </div>
-      
+      <div v-else style="padding-top:50%;">
+      <!-- <img src="../assets/sun copy.svg" alt=""> -->
+  <a-empty :description="false" />
+  <p>ไม่มีข้อมูล</p>
+    </div>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import 'ant-design-vue/lib/date-picker/style/css'; // for css
 import firebase from "firebase";
 import Menu from "../components/Menu";
 // import carousel from "vue-owl-carousel";
@@ -203,7 +209,7 @@ export default {
     if(num !== 0){
      this.num_page = num
     }
-    
+
     console.log("num_page", this.num_page );
     setTimeout(() => this.gatSevDay(status), 3000);
   },
@@ -223,7 +229,7 @@ export default {
     test() {
       console.log("partUser", this.partUser);
     },
-    
+
     selectUser(e) {
       if (this.dataUserSelect.length > 0) {
         if (this.dataUserSelect.includes(e) === false) {
@@ -287,7 +293,7 @@ export default {
         }
       });
       }
-      
+
     },
     minus(number, opt) {
       if (number[opt] > 0) {
@@ -317,7 +323,7 @@ export default {
           blocks: this.user_Selected[i].blocks,
           digs: this.user_Selected[i].digs,
           aces: this.user_Selected[i].aces,
-          serviceError: this.user_Selected[i].serviceError, 
+          serviceError: this.user_Selected[i].serviceError,
           uid: this.user_Selected[i].uid,
           date:date});
         var date2 = today.getMonth() + 1 + ":" + today.getDate() + ":" + today.getFullYear();
@@ -331,7 +337,7 @@ export default {
           blocks: this.user_Selected[i].blocks,
           digs: this.user_Selected[i].digs,
           aces: this.user_Selected[i].aces,
-          serviceError: this.user_Selected[i].serviceError, 
+          serviceError: this.user_Selected[i].serviceError,
           photo: this.dataUserSelect[i].photo,
           date:date});
         }else{
@@ -343,16 +349,16 @@ export default {
           blocks: this.user_Selected[i].blocks,
           digs: this.user_Selected[i].digs,
           aces: this.user_Selected[i].aces,
-          serviceError: this.user_Selected[i].serviceError, 
+          serviceError: this.user_Selected[i].serviceError,
           photo: this.dataUserSelect[i].photo,
           date:date});
         }
-        
+
       }
 
 
-      
-      
+
+
       // console.log("save",this.user_Selected);
       this.dataUserSelect = [],
       this.user_Selected = []
@@ -375,7 +381,7 @@ export default {
 .button {
   background-color: #f9f9f9;
   border-radius: 50%;
-  color: #528123;
+  color: #123B8E;
   padding: 10px;
   text-align: center;
   text-decoration: none;
@@ -409,7 +415,7 @@ export default {
   padding-right: 5%;
 }
 .button_select:hover {
-  background-color: #90c748;
+  background-color: #4979DC;
   border-radius: 10px;
   color: #f9f9f9;
   padding: 14px;
@@ -422,7 +428,7 @@ export default {
 }
 .btn {
   width: 80%;
-  background-color: rgb(126, 199, 66); /* Green */
+  background-color:#123B8E; /* Green */
   border: none;
   color: rgb(255, 255, 255);
   padding: 16px 16px 16px 16px;
@@ -466,6 +472,10 @@ export default {
   width: 25px;
   border-radius: 50%;
   display: inline-block;
+}
+span:hover{
+  background-color: #4979DC;
+  color: #ffffff;
 }
 @media only screen and (max-width: 1024px) {
   .div_home {
