@@ -7,7 +7,7 @@
             alt="index.name"
             style="border-radius: 50%; width: 2.5rem; height: 2.5rem"
           />
-          <p class="text">{{ index.name }}</p>
+          <p class="text_about">{{ index.name }}</p>
         </div>
         <carousel
           class="col"
@@ -43,7 +43,7 @@
             <p>Error</p>
             <b>{{ index.serviceError }}</b>
           </slide>
-          
+
         </carousel>
         <br>
       </div>
@@ -63,7 +63,7 @@ export default {
             dataMax:[],
         }
     },
-    
+
 
 }
 </script>

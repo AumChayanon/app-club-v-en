@@ -66,6 +66,10 @@ export default {
   cursor: pointer;
   z-index: 2;
 }
+.btn:hover {
+  background-color:  #4979DC; /* Green */
+  color: rgb(255, 255, 255);
+}
 .bg-image{
 height: 100%;
   background-image: url("../assets/bgm.png");

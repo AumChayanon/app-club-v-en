@@ -12,7 +12,7 @@
       >
         <slide>
           <div
-            class="button button3"
+            class="button_about button3"
             id="status_load"
             style="border-radius: 50%; width: 3rem; height: 3rem"
             v-on:click="today"
@@ -23,7 +23,7 @@
         </slide>
         <slide>
           <div
-            class="button button3"
+            class="button_about button3"
             id="status_load"
             style="border-radius: 50%; width: 3rem; height: 3rem"
             v-on:click="max"
@@ -34,7 +34,7 @@
         </slide>
         <slide>
           <div
-            class="button button3"
+            class="button_about button3"
             id="status_load"
             style="border-radius: 50%; width: 3rem; height: 3rem"
           >
@@ -44,7 +44,7 @@
         </slide>
         <slide>
           <div
-            class="button button3"
+            class="button_about button3"
             id="status_load"
             style="border-radius: 50%; width: 3rem; height: 3rem"
           >
@@ -171,7 +171,7 @@ export default {
 .div_about {
   margin: 0px 16px 0px 16px;
 }
-.button {
+.button_about {
   background-color: #f9f9f9;
   border-radius: 50%;
   color: #528123;
@@ -187,7 +187,7 @@ export default {
   flex-basis: initial;
   padding-right: 5%;
 }
-.text {
+.text_about {
   font-size: 12px;
   display: block;
   width: 50px;
