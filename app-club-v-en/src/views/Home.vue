@@ -21,7 +21,7 @@
           ></b-form-radio-group>
           <div class="mt-3"></div>
         </div> -->
-        <carousel :auto-play-direction="forward" :pagination-enabled="false" :per-page="this.num_page">
+        <carousel :pagination-enabled="false" :per-page="this.num_page">
           <slide v-for="item in partDataUser" :key="item.id">
             <div v-on:click="selectUser(item)">
               <div class="button_select">
@@ -171,7 +171,6 @@ export default {
         { item: "man", name: "ชาย" },
         { item: "female", name: "หญิง" },
       ],
-      forward: "",
       dataUserSelect: [],
       user_Selected: [],
       opt: {
