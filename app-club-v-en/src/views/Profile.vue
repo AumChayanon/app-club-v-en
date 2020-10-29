@@ -118,6 +118,7 @@ export default {
         await this.potential.push(aces)
         await this.potential.push(serviceError)
         await //console.log(this.allData);
+        await this.graphWeight()
         setTimeout(() => this.graphWeight() , 2000);
       },
       logout() {
@@ -141,7 +142,7 @@ export default {
               label: "ศักยภาพ",
               data: this.potential,
               backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-              borderColor: ['rgba(54, 162, 235, 1)'],
+              borderColor: ['#4979DC'],
             },
           ],
         },
@@ -164,6 +165,20 @@ export default {
 .div_profile {
   margin: 0px 32px 0px 32px;
   
+}
+.div_btn{
+  width: 80%;
+  background-color:#123B8E; /* Green */
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 16px 16px 16px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 9px 5px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 #div_his{
     margin: 0px 10px 0px 10px;

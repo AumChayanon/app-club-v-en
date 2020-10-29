@@ -59,7 +59,7 @@
         </carousel>
         <button
           type="button"
-          class="btn btn-outline-success"
+          class="btn_home btn-outline-success"
           v-on:click="userSelected"
           v-if="this.status_btn_userSelected === 'default'"
         >
@@ -135,11 +135,12 @@
           </carousel>
         </div>
         <div>
-          <b-button type="button" class="div_btn" v-on:click="save"
+          <b-button type="button" class="btn_home" v-on:click="save"
           >บันทึก</b-button>
           <br>
           <a v-on:click="cancel">ยกเลิก</a>
         </div>
+        <br>
       </div>
       <div v-else style="padding-top:50%;">
       <!-- <img src="../assets/sun copy.svg" alt=""> -->
@@ -416,7 +417,7 @@ export default {
   margin: 5px 2px;
   box-shadow: -5px -5px 5px #ffffff, 5px 5px 10px #dbdada;
 }
-.btn {
+.btn_home {
   width: 80%;
   background-color:#123B8E; /* Green */
   border: none;
