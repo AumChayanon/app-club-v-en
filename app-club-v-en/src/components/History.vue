@@ -1,10 +1,10 @@
 <template>
   <div class="div_his">
-    
+
     <div class="row" v-for="item in data" :key="item.id">
       <br />
       <p>{{item[0].date}}</p>
-      <div class="row" id="divToday" v-for="index in item" :key="index.id">
+      <div class="row" id="divHis" v-for="index in item" :key="index.id">
         <div class="col" style="max-width:20%;">
           <img
             :src="index.photo"
@@ -44,8 +44,9 @@
             <h5>{{ index.serviceError }}</h5>
           </slide>
         </carousel>
+        <br>
       </div>
-      
+
     </div>
   </div>
 </template>
@@ -61,8 +62,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .div_his{
   margin: 0px 16px 0px 16px;
+}
+#divHis {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  color: #333333;
+  padding: 10px;
+  font-size: 14px;
+  margin: 5px 5px;
+  box-shadow: -5px -5px 5px #ffffff, 5px 5px 10px #dbdada;
+}
+.row {
+  margin-bottom: 16px;
 }
 </style>

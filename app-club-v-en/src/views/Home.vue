@@ -21,7 +21,7 @@
           ></b-form-radio-group>
           <div class="mt-3"></div>
         </div> -->
-        <carousel :pagination-enabled="false" :per-page="this.num_page">
+        <carousel :pagination-enabled="false" :per-page-custom="[[360, 2.5], [700, 4],[1199, 6]] ">
           <slide v-for="item in partDataUser" :key="item.id">
             <div v-on:click="selectUser(item)">
               <div class="button_select">
@@ -41,7 +41,7 @@
       <div v-if="this.dataUserSelect.length > 0">
         <br />
         <b>ผู้เล่นที่ถูกเลือก</b>
-        <carousel :auto-play-direction="forward" :pagination-enabled="false" :per-page="this.num_page">
+        <carousel :pagination-enabled="false" :per-page-custom="[[360, 4.5], [700, 6],[1199, 8]] ">
           <slide v-for="index in dataUserSelect" :key="index.id">
             <div
               class="button button3"
@@ -183,7 +183,6 @@ export default {
       },
       status_btn_userSelected:"default",
       status_div_showAllUser:"default",
-      num_page: 3
     };
   },
   components: {
@@ -204,10 +203,6 @@ export default {
         return (status = 1);
       }
     });
-    var num = this.partDataUser.length % 4
-    if(num !== 0){
-     this.num_page = num
-    }
 
     //console.log("num_page", this.num_page );
     setTimeout(() => this.gatSevDay(status), 3000);
@@ -375,7 +370,7 @@ export default {
 </script>
 <style>
 .div_home {
-  margin: 0px 20% 0px 20%;
+  margin: 0px 16px 0px 16px;
 }
 .button {
   background-color: #f9f9f9;
@@ -408,10 +403,6 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-.VueCarousel-slide {
-  flex-basis: initial;
-  padding-right: 5%;
 }
 .button_select:hover {
   background-color: #4979DC;
@@ -475,10 +466,5 @@ export default {
 span:hover{
   background-color: #4979DC;
   color: #ffffff;
-}
-@media only screen and (max-width: 1024px) {
-  .div_home {
-  margin: 0px 16px 0px 16px;
-}
 }
 </style>

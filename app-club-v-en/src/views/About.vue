@@ -6,9 +6,8 @@
     <div class="div_about">
       <h1 style="color: #123b8e">คะแนนของผู้เล่น</h1>
       <carousel
-        :auto-play-direction="forward"
         :pagination-enabled="false"
-        :per-page="3"
+        :per-page-custom="[[360, 4.5], [700, 6],[1199, 8]] "
       >
         <slide>
           <div
@@ -95,7 +94,6 @@ export default {
   },
   data() {
     return {
-      forward: "",
       status: "today",
       datatoday: [],
       dataMax: [],
@@ -265,10 +263,6 @@ export default {
   font-size: 16px;
   margin: 4px 2px;
   box-shadow: -5px -5px 5px #ffffff, 5px 5px 10px #dbdada;
-}
-.VueCarousel-slide {
-  flex-basis: initial;
-  padding-right: 5%;
 }
 .text_about {
   font-size: 12px;

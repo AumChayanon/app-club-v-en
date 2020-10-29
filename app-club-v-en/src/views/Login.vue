@@ -4,11 +4,11 @@
     <div class="bg-text">
     <div class="center" style="width: 100%; height: 80%">
       <div style="padding-top: 16rem">
-        <h1 style="text-align: center">Club V EN</h1>
+        <h1 style="text-align: center; color: rgb(255, 255, 255);">Club V EN</h1>
       </div>
     </div>
     <div class="center" style="width: 100%; height: 20%">
-      <b-button variant="success" v-on:click="socialGoogleLogin()">
+      <b-button class="btn" v-on:click="socialGoogleLogin()">
         <!--ion-icon name="logo-google"></ion-icon-->เข้าสู่ระบบด้วย Google mail
       </b-button>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="div_error">
-    <div class="row" id="divToday" v-for="index in data" :key="index.id">
+    <div class="row" id="divError" v-for="index in data" :key="index.id">
         <div class="col" style="max-width:20%;">
           <img
             :src="index.photo"
@@ -30,8 +30,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .div_error{
   margin: 0px 16px 0px 16px;
+}
+#divError{
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  color: #333333;
+  padding: 10px;
+  font-size: 14px;
+  margin: 10px 5px;
+  box-shadow: -5px -5px 5px #ffffff, 5px 5px 10px #dbdada;
+}
+.row {
+  margin-bottom: 16px;
 }
 </style>

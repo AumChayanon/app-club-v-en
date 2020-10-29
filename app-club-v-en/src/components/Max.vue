@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .div_max{
     margin: 0px 16px 0px 16px;
 }
