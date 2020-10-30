@@ -11,10 +11,25 @@
             style="border-radius: 50%; width: 5rem; height: 5rem"
           />
         </div>
-        <div class="col" style="max-width: 70%;  text-align: left;"><h5>{{datapro.name}}</h5><p style="color: rgb(145, 145, 145);">{{datapro.email}}</p></div>
+        <div v-if="this.status ==='default'" class="col" style="max-width: 70%;  text-align: left;"><h5>{{datapro.name}}</h5><p style="color: rgb(145, 145, 145);"><b>เพศ: </b>{{datapro.sex}}</p><p style="color: rgb(145, 145, 145);"><b>E-mail: </b>{{datapro.email}}</p></div>
+        <div v-if="this.status ==='edit'" class="col" style="max-width: 70%;  text-align: left;"><b for="exampleInputEmail1">ชื่อ</b><input type="email" class="form-control" v-model="nameUser" placeholder="กรุณากรอกชื่อ"><b for="exampleInputEmail1">เพศ</b><input type="email" class="form-control"  v-model="sexUser" placeholder="กรุณากรอกเพศ"><p style="color: rgb(145, 145, 145);"><b>E-mail: </b>{{datapro.email}}</p></div>
+        <div class="row">
+        </div>
     </div>
-    <div class="row">
-        <div class="col">
+    <div>
+      <div v-if="this.status ==='default'" >
+        <a v-on:click="editUser(datapro.uid)">แก้ไข</a>
+      </div>
+      <div v-if="this.status ==='edit'">
+        <b-button type="button" class="div_btn" v-on:click="updateUser"
+          >อัปเดท</b-button
+        >
+        <br>
+        <a v-on:click="cancel"
+          >ยกเลิก</a>
+          <hr>
+      </div>
+        <div>
         <b-button type="button" class="div_btn" v-on:click="logout"
           >ออกจากระบบ</b-button
         >
@@ -76,7 +91,11 @@ export default {
           dataUid:[],
           datapro:[],
           potential:[],
-          allData:[]
+          allData:[],
+          nameUser:"",
+          sexUser:"",
+          status:"default",
+          key_user:""
       }
   },
   async created() {
@@ -119,7 +138,7 @@ export default {
         await this.potential.push(serviceError)
         await //console.log(this.allData);
         await this.graphWeight()
-        setTimeout(() => this.graphWeight() , 2000);
+        setTimeout(() => this.graphWeight() , 3000);
       },
       logout() {
       firebase
@@ -157,6 +176,30 @@ export default {
       // this.get_all_cal();
       console.log(myLineChartWeight);
     },
+    async editUser(e){
+      this.status = "edit"
+      var dataRef = database.ref("/Users/");
+      this.key_user= ""
+    await dataRef.on("child_added", (snapshot) => {
+      if(snapshot.val().uid === e){
+        this.key_user = snapshot.key
+      }
+    });
+    await console.log("key_user",this.key_user)
+    },
+    updateUser(){
+      database.ref("/Users/" + this.key_user).set({
+        email:this.datapro.email,
+        name:this.nameUser,
+        photo:this.datapro.photo,
+        sex:this.sexUser,
+        uid:this.datapro.uid, });
+      console.log(this.datapro.email,this.nameUser,this.datapro.photo,this.sexUser, this.datapro.uid, this.key_user)
+        this.status = "default"
+    },
+    cancel(){
+      this.status = "default"
+    }
   },
 };
 </script>

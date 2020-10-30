@@ -84,14 +84,13 @@
               style="border-radius: 50%; width: 2.5rem; height: 2.5rem"
             />
           </div>
-          <div class="col" style="max-width: 10%">
+          <div class="col" style="max-width: 200px; text-align: left;">
             <p>{{ index.name }}</p>
           </div>
           <carousel
             class="col"
             :pagination-enabled="false"
-            :per-page="3.5"
-            :auto-play-direction="forward"
+            :per-page-custom="[[360, 3.5], [700, 6],[1199, 8]] "
           >
             <slide>
               <h6>Set</h6>
@@ -206,10 +205,10 @@ export default {
     });
 
     //console.log("num_page", this.num_page );
-    setTimeout(() => this.gatSevDay(status), 3000);
+    setTimeout(() => this.createUser(status), 3000);
   },
   methods: {
-    gatSevDay(status) {
+    createUser(status) {
       var dataRef = database.ref("/Users/");
       //console.log("status", status);
       if (status === 0) {
@@ -221,10 +220,6 @@ export default {
         });
       }
     },
-    test() {
-      //console.log("partUser", this.partUser);
-    },
-
     selectUser(e) {
       if (this.dataUserSelect.length > 0) {
         if (this.dataUserSelect.includes(e) === false) {
@@ -234,8 +229,6 @@ export default {
       } else {
         this.dataUserSelect.push(e);
       }
-
-      //console.log("uid: ", this.dataUserSelect);
     },
     userSelected() {
       this.user_Selected = [];
@@ -350,11 +343,6 @@ export default {
         }
 
       }
-
-
-
-
-      // //console.log("save",this.user_Selected);
       this.dataUserSelect = [],
       this.user_Selected = []
       this.status_btn_userSelected="default"
