@@ -12,7 +12,7 @@
           />
         </div>
         <div v-if="this.status ==='default'" class="col" style="max-width: 70%;  text-align: left;"><h5>{{datapro.name}}</h5><p style="color: rgb(145, 145, 145);"><b>เพศ: </b>{{datapro.sex}}</p><p style="color: rgb(145, 145, 145);"><b>E-mail: </b>{{datapro.email}}</p></div>
-        <div v-if="this.status ==='edit'" class="col" style="max-width: 70%;  text-align: left;"><b for="exampleInputEmail1">ชื่อ</b><input type="email" class="form-control" v-model="nameUser" placeholder="กรุณากรอกชื่อ"><b for="exampleInputEmail1">เพศ</b><input type="email" class="form-control"  v-model="sexUser" placeholder="กรุณากรอกเพศ"><p style="color: rgb(145, 145, 145);"><b>E-mail: </b>{{datapro.email}}</p></div>
+        <div v-if="this.status ==='edit'" class="col" style="max-width: 70%;  text-align: left;"><b for="exampleInputEmail1">ชื่อ</b><input type="email" class="form-control" v-model="nameUser" placeholder="กรุณากรอกชื่อ"><b for="exampleInputEmail1">เพศ</b><input type="email" class="form-control"  v-model="sexUser" placeholder="กรุณากรอกเพศ (ภาษาไทย)"><p style="color: rgb(145, 145, 145);"><b>E-mail: </b>{{datapro.email}}</p></div>
         <div class="row">
         </div>
     </div>
@@ -108,7 +108,7 @@ export default {
           this.datapro = snapshot.val()
       }
     });
-    this.graphWeight() 
+    this.graphWeight()
     this.getData()
     //console.log(this.datapro);
   },methods: {
@@ -207,7 +207,7 @@ export default {
 <style>
 .div_profile {
   margin: 0px 32px 0px 32px;
-  
+
 }
 .div_btn{
   width: 80%;

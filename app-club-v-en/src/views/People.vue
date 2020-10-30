@@ -4,6 +4,7 @@
       <Menu />
     </div>
     <div class="div_people">
+      <h1 style="color: #123b8e">สมาชิก</h1>
     <div class="search-wrapper panel-heading col-sm-12" style="padding:0px 35px 25px 35px;">
       <input
         class="form-control"
@@ -11,7 +12,7 @@
         v-model="searchQuery"
         placeholder="ค้นหาชื่อ"
         style="
-            box-shadow: -5px -5px 5px #ffffff, 5px 5px 10px #dbdada; 
+            box-shadow: -5px -5px 5px #ffffff, 5px 5px 10px #dbdada;
             border-radius: 50px;
             background-color: #F9F9F9;
             "
@@ -20,7 +21,7 @@
     <div style="text-align: left;">
         <h4>สมาชิกทั้งหมด</h4>
     </div>
-    
+
     <div>
       <table class="table table-hover" style="text-align: left;">
         <thead>

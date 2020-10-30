@@ -10,7 +10,7 @@
       </div>
       <div v-if="status_div_showAllUser === 'default'" style="text-align: left; padding-top: 10px">
         <b>เลือกตัวผู้เล่น </b>
-        <!-- <div>
+        <div>
           <b-form-radio-group
             v-model="selected"
             :options="options"
@@ -20,9 +20,9 @@
             disabled-field="notEnabled"
           ></b-form-radio-group>
           <div class="mt-3"></div>
-        </div> -->
+        </div>
         <carousel :pagination-enabled="false" :per-page-custom="[[360, 2.5], [700, 4],[1199, 6]] ">
-          <slide v-for="item in partDataUser" :key="item.id">
+          <slide v-for="item in resultQuery" :key="item.id">
             <div v-on:click="selectUser(item)">
               <div class="button_select">
                 <img
@@ -165,11 +165,11 @@ export default {
     return {
       dataUser: [],
       partDataUser: [],
-      selected: "A",
+      selected: "all",
       options: [
         { item: "all", name: "ทั้งหมด" },
-        { item: "man", name: "ชาย" },
-        { item: "female", name: "หญิง" },
+        { item: "ชาย", name: "ชาย" },
+        { item: "หญิง", name: "หญิง" },
       ],
       dataUserSelect: [],
       user_Selected: [],
@@ -203,9 +203,25 @@ export default {
         return (status = 1);
       }
     });
-
     //console.log("num_page", this.num_page );
     setTimeout(() => this.createUser(status), 3000);
+  },
+  computed: {
+    resultQuery() {
+      if (this.selected === "ชาย" || this.selected === "หญิง") {
+        return this.partDataUser.filter((item) => {
+          return this.selected
+            .toLowerCase()
+            .split(" ")
+            .every(
+              (v) =>
+                item.sex.toLowerCase().includes(v)
+            );
+        });
+      } else {
+        return this.partDataUser;
+      }
+    },
   },
   methods: {
     createUser(status) {
@@ -217,6 +233,7 @@ export default {
           email: this.dataUser.email,
           photo: this.dataUser.photoURL,
           uid: this.dataUser.uid,
+          sex:"ไม่มี"
         });
       }
     },
