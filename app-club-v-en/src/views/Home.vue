@@ -4,11 +4,13 @@
       <Menu />
     </div>
     <div class="div_home">
-
       <div>
-        <h2 style="color: #123B8E;">Club Volleyball EN</h2>
+        <h2 style="color: #123b8e">Club Volleyball EN</h2>
       </div>
-      <div v-if="status_div_showAllUser === 'default'" style="text-align: left; padding-top: 10px">
+      <div
+        v-if="status_div_showAllUser === 'default'"
+        style="text-align: left; padding-top: 10px"
+      >
         <b>เลือกตัวผู้เล่น </b>
         <div>
           <b-form-radio-group
@@ -21,7 +23,14 @@
           ></b-form-radio-group>
           <div class="mt-3"></div>
         </div>
-        <carousel :pagination-enabled="false" :per-page-custom="[[360, 2.5], [700, 4],[1199, 6]] ">
+        <carousel
+          :pagination-enabled="false"
+          :per-page-custom="[
+            [360, 2.5],
+            [700, 4],
+            [1199, 6],
+          ]"
+        >
           <slide v-for="item in resultQuery" :key="item.id">
             <div v-on:click="selectUser(item)">
               <div class="button_select">
@@ -30,7 +39,7 @@
                   :alt="item.name"
                   style="border-radius: 50%; width: 2.5rem; height: 2.5rem"
                 />
-                <p style="padding-top: 10px;" class="text">
+                <p style="padding-top: 10px" class="text">
                   {{ item.name }}
                 </p>
               </div>
@@ -41,7 +50,14 @@
       <div v-if="this.dataUserSelect.length > 0">
         <br />
         <b>ผู้เล่นที่ถูกเลือก</b>
-        <carousel :pagination-enabled="false" :per-page-custom="[[360, 4.5], [700, 6],[1199, 8]] ">
+        <carousel
+          :pagination-enabled="false"
+          :per-page-custom="[
+            [360, 4.5],
+            [700, 6],
+            [1199, 8],
+          ]"
+        >
           <slide v-for="index in dataUserSelect" :key="index.id">
             <div
               class="button button3"
@@ -67,8 +83,8 @@
         </button>
       </div>
       <div v-if="this.user_Selected.length > 0">
-        <div style="text-align: left;">
-<b>เริ่มเก็บข้อมูลผู้เล่น</b>
+        <div style="text-align: left">
+          <b>เริ่มเก็บข้อมูลผู้เล่น</b>
         </div>
 
         <div
@@ -84,13 +100,17 @@
               style="border-radius: 50%; width: 2.5rem; height: 2.5rem"
             />
           </div>
-          <div class="col" style="max-width: 200px; text-align: left;">
+          <div class="col" style="max-width: 200px; text-align: left">
             <p>{{ index.name }}</p>
           </div>
           <carousel
             class="col"
             :pagination-enabled="false"
-            :per-page-custom="[[360, 3.5], [700, 6],[1199, 8]] "
+            :per-page-custom="[
+              [360, 3.5],
+              [700, 6],
+              [1199, 8],
+            ]"
           >
             <slide>
               <h6>Set</h6>
@@ -135,24 +155,25 @@
         </div>
         <div>
           <b-button type="button" class="btn_home" v-on:click="save"
-          >บันทึก</b-button>
-          <br>
+            >บันทึก</b-button
+          >
+          <br />
           <a v-on:click="cancel">ยกเลิก</a>
         </div>
-        <br>
+        <br />
       </div>
-      <div v-else style="padding-top:50%;">
-      <!-- <img src="../assets/sun copy.svg" alt=""> -->
-  <a-empty :description="false" />
-  <p>ไม่มีข้อมูล</p>
-    </div>
+      <div v-else style="padding-top: 50%">
+        <!-- <img src="../assets/sun copy.svg" alt=""> -->
+        <a-empty :description="false" />
+        <p>ไม่มีข้อมูล</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import 'ant-design-vue/lib/date-picker/style/css'; // for css
+import "ant-design-vue/lib/date-picker/style/css"; // for css
 import firebase from "firebase";
 import Menu from "../components/Menu";
 // import carousel from "vue-owl-carousel";
@@ -181,8 +202,12 @@ export default {
         aces: "aces",
         serviceError: "serviceError",
       },
-      status_btn_userSelected:"default",
-      status_div_showAllUser:"default",
+      status_btn_userSelected: "default",
+      status_div_showAllUser: "default",
+      statusScore: "",
+      setNumber: "",
+      scoreMe: "",
+      scoreHis: "",
     };
   },
   components: {
@@ -213,10 +238,7 @@ export default {
           return this.selected
             .toLowerCase()
             .split(" ")
-            .every(
-              (v) =>
-                item.sex.toLowerCase().includes(v)
-            );
+            .every((v) => item.sex.toLowerCase().includes(v));
         });
       } else {
         return this.partDataUser;
@@ -233,7 +255,7 @@ export default {
           email: this.dataUser.email,
           photo: this.dataUser.photoURL,
           uid: this.dataUser.uid,
-          sex:"ไม่มี"
+          sex: "ไม่มี",
         });
       }
     },
@@ -264,41 +286,39 @@ export default {
         });
       }
       //console.log(this.user_Selected);
-      this.status_btn_userSelected = "close"
-      this.status_div_showAllUser = "close"
+      this.status_btn_userSelected = "close";
+      this.status_div_showAllUser = "close";
     },
     delUserSelect(e) {
-      if(this.user_Selected.length > 0){
-      //   Swal.fire({
-      //   text: "ไม่สามารถลบผู้เล่นในขณะกำลังเก็บข้อมูลผู้เล่นได้?",
-      //   icon: "info",
-      //   confirmButtonColor: "rgb(126, 199, 66)",
-      //   confirmButtonText: "ยกเลิก",
-      // })
-      //console.log("ลบผู้เล่นไม่ได้");
-      }
-      else{
+      if (this.user_Selected.length > 0) {
+        //   Swal.fire({
+        //   text: "ไม่สามารถลบผู้เล่นในขณะกำลังเก็บข้อมูลผู้เล่นได้?",
+        //   icon: "info",
+        //   confirmButtonColor: "rgb(126, 199, 66)",
+        //   confirmButtonText: "ยกเลิก",
+        // })
+        //console.log("ลบผู้เล่นไม่ได้");
+      } else {
         Swal.fire({
-        title: "ลบผู้เล่น?",
-        text: "คุณแน่ในที่จะลบตัวผู้เล่นคนนี้!",
-        icon: "info",
-        showCancelButton: true,
-        confirmButtonColor: "rgb(126, 199, 66)",
-        cancelButtonColor: "#353535",
-        confirmButtonText: "ตกลง",
-        cancelButtonText: "ยกเลิก",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const del = this.dataUserSelect.find((mgs) => mgs.uid == e);
-          //console.log("del", del);
-          const index = this.dataUserSelect.indexOf(del);
-          //console.log("index", index);
-          this.dataUserSelect.splice(index, 1);
-          Swal.fire("ลบสำเร็จ!", "ลบตัวผู้เล่นที่คุณเลือกสำเร็จ.", "success");
-        }
-      });
+          title: "ลบผู้เล่น?",
+          text: "คุณแน่ในที่จะลบตัวผู้เล่นคนนี้!",
+          icon: "info",
+          showCancelButton: true,
+          confirmButtonColor: "rgb(126, 199, 66)",
+          cancelButtonColor: "#353535",
+          confirmButtonText: "ตกลง",
+          cancelButtonText: "ยกเลิก",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const del = this.dataUserSelect.find((mgs) => mgs.uid == e);
+            //console.log("del", del);
+            const index = this.dataUserSelect.indexOf(del);
+            //console.log("index", index);
+            this.dataUserSelect.splice(index, 1);
+            Swal.fire("ลบสำเร็จ!", "ลบตัวผู้เล่นที่คุณเลือกสำเร็จ.", "success");
+          }
+        });
       }
-
     },
     minus(number, opt) {
       if (number[opt] > 0) {
@@ -310,7 +330,66 @@ export default {
     plus(number, opt) {
       number[opt] = number[opt] + 1;
     },
-    save(){
+    async save() {
+      await this.getScore();
+    },
+    cancel() {
+      (this.dataUserSelect = []),
+        (this.user_Selected = []),
+        (this.status_btn_userSelected = "default");
+      this.status_div_showAllUser = "default";
+    },
+    getScore() {
+      Swal.fire({
+        title: "ผลการแข่ง",
+        input: "radio",
+        inputOptions: {
+          win: "ชนะ",
+          lose: "แพ้",
+        },
+        inputValidator: (value) => {
+          if (value) {
+            Swal.fire({
+              title: "<h3>ผลคะแนน</h3>",
+              html:
+                `<p>ผลคะแนนของ set นี้</p>` +
+                `<div class="form-row"><div style="text-align: left; padding:5px;"><label for="validationCustom01">Set: </label><input type="text" class="form-control" id="setNumber" placeholder="set ที่" >` +
+                `<div class="form-row"><div  style="text-align: left; padding:5px;"><label for="validationCustom01">คะแนนเรา: </label><input type="text" class="form-control" id="scoreMe" placeholder="คะแนนทีมเรา" > ` +
+                `<div class="form-row"><div style="text-align: left; padding:5px;"><label for="validationCustom01">คะแนนเขา: </label><input type="text" class="form-control" id="scoreHis" placeholder="คะแนนทีมเขา" >`,
+              showCloseButton: true,
+              showCancelButton: true,
+              focusConfirm: false,
+              confirmButtonText: "บันทึก",
+              confirmButtonAriaLabel: "Thumbs up, great!",
+              cancelButtonText: "ยกเลิก",
+              cancelButtonAriaLabel: "Thumbs down",
+              confirmButtonColor: "#123b8e",
+              cancelButtonColor: "#313131",
+              preConfirm: () => [
+                document.getElementById("setNumber").value,
+                document.getElementById("scoreMe").value,
+                document.getElementById("scoreHis").value,
+              ],
+            }).then((result) => {
+              if (result.value) {
+                this.statusScore = value;
+                this.setNumber = result.value[0];
+                this.scoreMe = result.value[1];
+                this.scoreHis = result.value[2];
+                console.log(
+                  value,
+                  result.value[0],
+                  result.value[1],
+                  result.value[2]
+                );
+                this.upDataToFirebase()
+              }
+            });
+          }
+        },
+      });
+    },
+    upDataToFirebase(){
       const today = new Date();
       var date =
         today.getMonth() +
@@ -320,7 +399,9 @@ export default {
         "/" +
         today.getFullYear();
       for (let i = 0; i < this.user_Selected.length; i++) {
-        var dataRef = database.ref("/PersonalData/" + this.user_Selected[i].uid + "/");
+        var dataRef = database.ref(
+          "/PersonalData/" + this.user_Selected[i].uid + "/"
+        );
         dataRef.push({
           name: this.dataUserSelect[i].name,
           set: this.user_Selected[i].set,
@@ -330,46 +411,59 @@ export default {
           aces: this.user_Selected[i].aces,
           serviceError: this.user_Selected[i].serviceError,
           uid: this.user_Selected[i].uid,
-          date:date});
-        var date2 = today.getMonth() + 1 + ":" + today.getDate() + ":" + today.getFullYear();
+          date: date,
+          statusScore: this.statusScore,
+          setNumber: this.setNumber,
+          scoreMe: this.scoreMe,
+          scoreHis: this.scoreHis,
+        });
+        var date2 =
+          today.getMonth() +
+          1 +
+          ":" +
+          today.getDate() +
+          ":" +
+          today.getFullYear();
         var dataRefToData = database.ref("/DataToDay/" + date2 + "/");
-        if(i === 0){
+        if (i === 0) {
           dataRefToData.push({
-          status:"start",
-          name: this.dataUserSelect[i].name,
-          set: this.user_Selected[i].set,
-          spikes: this.user_Selected[i].spikes,
-          blocks: this.user_Selected[i].blocks,
-          digs: this.user_Selected[i].digs,
-          aces: this.user_Selected[i].aces,
-          serviceError: this.user_Selected[i].serviceError,
-          photo: this.dataUserSelect[i].photo,
-          date:date});
-        }else{
+            status: "start",
+            name: this.dataUserSelect[i].name,
+            set: this.user_Selected[i].set,
+            spikes: this.user_Selected[i].spikes,
+            blocks: this.user_Selected[i].blocks,
+            digs: this.user_Selected[i].digs,
+            aces: this.user_Selected[i].aces,
+            serviceError: this.user_Selected[i].serviceError,
+            photo: this.dataUserSelect[i].photo,
+            date: date,
+            statusScore: this.statusScore,
+            setNumber: this.setNumber,
+            scoreMe: this.scoreMe,
+            scoreHis: this.scoreHis,
+          });
+        } else {
           dataRefToData.push({
-            status:"null",
-          name: this.dataUserSelect[i].name,
-          set: this.user_Selected[i].set,
-          spikes: this.user_Selected[i].spikes,
-          blocks: this.user_Selected[i].blocks,
-          digs: this.user_Selected[i].digs,
-          aces: this.user_Selected[i].aces,
-          serviceError: this.user_Selected[i].serviceError,
-          photo: this.dataUserSelect[i].photo,
-          date:date});
+            status: "null",
+            name: this.dataUserSelect[i].name,
+            set: this.user_Selected[i].set,
+            spikes: this.user_Selected[i].spikes,
+            blocks: this.user_Selected[i].blocks,
+            digs: this.user_Selected[i].digs,
+            aces: this.user_Selected[i].aces,
+            serviceError: this.user_Selected[i].serviceError,
+            photo: this.dataUserSelect[i].photo,
+            date: date,
+            statusScore: this.statusScore,
+            setNumber: this.setNumber,
+            scoreMe: this.scoreMe,
+            scoreHis: this.scoreHis,
+          });
         }
-
       }
-      this.dataUserSelect = [],
-      this.user_Selected = []
-      this.status_btn_userSelected="default"
-      this.status_div_showAllUser="default"
-    },
-    cancel(){
-      this.dataUserSelect = [],
-      this.user_Selected = [],
-      this.status_btn_userSelected="default"
-      this.status_div_showAllUser="default"
+      (this.dataUserSelect = []), (this.user_Selected = []);
+      this.status_btn_userSelected = "default";
+      this.status_div_showAllUser = "default";
     }
   },
 };
@@ -381,7 +475,7 @@ export default {
 .button {
   background-color: #f9f9f9;
   border-radius: 50%;
-  color: #123B8E;
+  color: #123b8e;
   padding: 10px;
   text-align: center;
   text-decoration: none;
@@ -411,7 +505,7 @@ export default {
   text-overflow: ellipsis;
 }
 .button_select:hover {
-  background-color: #4979DC;
+  background-color: #4979dc;
   border-radius: 10px;
   color: #f9f9f9;
   padding: 14px;
@@ -424,7 +518,7 @@ export default {
 }
 .btn_home {
   width: 80%;
-  background-color:#123B8E; /* Green */
+  background-color: #123b8e; /* Green */
   border: none;
   color: rgb(255, 255, 255);
   padding: 16px 16px 16px 16px;
@@ -469,8 +563,8 @@ export default {
   border-radius: 50%;
   display: inline-block;
 }
-span:hover{
-  background-color: #4979DC;
+span:hover {
+  background-color: #4979dc;
   color: #ffffff;
 }
 </style>

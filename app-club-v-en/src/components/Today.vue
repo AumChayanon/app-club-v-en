@@ -1,8 +1,8 @@
 <template>
   <div class="today">
     <div v-if="this.data.length > 0">
-    <div class="row" v-for="(item, count) in data" :key="item.id">
-      <h5> set: {{ count + 1 }}</h5>
+    <div class="row" v-for="item in data" :key="item.id">
+      <h5> set: {{ item[0].setNumber }} <b v-if="item[0].statusScore === 'win'" style="color:#a2b54d;">{{ item[0].statusScore }}</b> <b  v-if="item[0].statusScore === 'lose'" style="color:#CC0000;">{{ item[0].statusScore }}</b> score: {{ item[0].scoreMe }}:{{ item[0].scoreHis }}</h5>
       <br />
       <div class="row" id="divToday" v-for="index in item" :key="index.id">
         <div class="col" style="max-width:20%;">

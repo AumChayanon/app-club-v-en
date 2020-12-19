@@ -149,7 +149,7 @@ export default {
           set = snapshot.val().set + set;
           spikes = snapshot.val().spikes + spikes;
           blocks = snapshot.val().blocks + blocks;
-          digs = snapshot.val().blocks + blocks;
+          digs = snapshot.val().digs + digs;
           aces = snapshot.val().aces + aces;
           serviceError = snapshot.val().serviceError + serviceError;
           uid = snapshot.val().uid
