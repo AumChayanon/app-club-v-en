@@ -88,11 +88,13 @@
       <div><h5>ศักยภาพ</h5></div>
       <canvas class="chart" id="my-chart-Weight" height="450"></canvas>
     </div>
+    <br>
+    <div><h4>ประวัติ</h4></div>
+    <perfect-scrollbar ref="scroll">
     <div class="row">
-      <div><h5>ประวัติ</h5></div>
-      <div class="row" id="div_his" v-for="index in allData" :key="index.id">
-        <div class="row">
-          <h6>set: {{ index.setNumber }} <b v-if="index.statusScore === 'win'" style="color:#a2b54d;">{{ index.statusScore }}</b> <b  v-if="index.statusScore === 'lose'" style="color:#CC0000;">{{ index.statusScore }}</b> score: {{ index.scoreMe }}:{{ index.scoreHis }}  ({{ index.date }})</h6>
+      <div class="row" id="div_his" v-for="index in allData" :key="index.id" style="padding:0px 0px 0px 10px;">
+        <div class="row" >
+          <h6  style="padding:20px 0px 0px 16px;">set: {{ index.setNumber }} <b v-if="index.statusScore === 'win'" style="color:#a2b54d;">{{ index.statusScore }}</b> <b  v-if="index.statusScore === 'lose'" style="color:#CC0000;">{{ index.statusScore }}</b> score: {{ index.scoreMe }}:{{ index.scoreHis }}  ({{ index.date }})</h6>
         </div>
         <div class="row" id="div_ele">
           <div class="col">
@@ -121,7 +123,8 @@
           </div>
         </div>
       </div>
-    </div>
+      
+    </div></perfect-scrollbar>
   </div>
 </template>
 
@@ -164,6 +167,11 @@ export default {
     this.getData();
     //console.log(this.datapro);
   },
+  watch: {
+  $route() {
+    this.$refs.scroll.$el.scrollTop = 0;
+  }
+},
   methods: {
     async getData() {
       var dataRef = database.ref("/PersonalData/" + this.dataUid + "/");
@@ -181,7 +189,7 @@ export default {
         digs = snapshot.val().blocks + blocks;
         aces = snapshot.val().aces + aces;
         serviceError = snapshot.val().serviceError + serviceError;
-        this.allData.push(snapshot.val());
+        this.allData.unshift(snapshot.val());
       });
       await this.potential.push(set);
       await this.potential.push(spikes);
@@ -359,5 +367,12 @@ input[type="file"] {
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
+}
+.ps {
+  height: 400px;
+  width: 100%;
+}
+.ps__thumb-x {
+    background-color: #aaa;
 }
 </style>

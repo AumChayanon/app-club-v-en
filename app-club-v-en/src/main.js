@@ -9,6 +9,8 @@ import* as firebase from "firebase";
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 
+import PerfectScrollbar from 'vue2-perfect-scrollbar'
+import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 Vue.config.productionTip = false
 
 // Install BootstrapVue
@@ -16,7 +18,7 @@ Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 Vue.use(Antd);
-
+Vue.use(PerfectScrollbar)
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
 authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,

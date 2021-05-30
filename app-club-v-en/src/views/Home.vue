@@ -86,7 +86,6 @@
         <div style="text-align: left">
           <b>เริ่มเก็บข้อมูลผู้เล่น</b>
         </div>
-
         <div
           class="row"
           id="divOneUesr"
@@ -208,6 +207,7 @@ export default {
       setNumber: "",
       scoreMe: "",
       scoreHis: "",
+      dataSumScore: [],
     };
   },
   components: {
@@ -256,6 +256,17 @@ export default {
           photo: this.dataUser.photoURL,
           uid: this.dataUser.uid,
           sex: "ไม่มี",
+        });
+        var dataRefSumScore = database.ref(
+          "/sumSore/" + this.dataUser.uid + "/"
+        );
+        dataRefSumScore.push({
+          max: 0,
+          maxSet: 0,
+          maxSpikes: 0,
+          maxBlocks: 0,
+          maxDigs: 0,
+          maxAces: 0,
         });
       }
     },
@@ -382,14 +393,15 @@ export default {
                   result.value[1],
                   result.value[2]
                 );
-                this.upDataToFirebase()
+                this.sumScore();
+                this.upDataToFirebase();
               }
             });
           }
         },
       });
     },
-    upDataToFirebase(){
+    upDataToFirebase() {
       const today = new Date();
       var date =
         today.getMonth() +
@@ -464,7 +476,38 @@ export default {
       (this.dataUserSelect = []), (this.user_Selected = []);
       this.status_btn_userSelected = "default";
       this.status_div_showAllUser = "default";
-    }
+    },
+    sumScore() {
+      for (let i = 0; i < this.user_Selected.length; i++) {
+        var dataRefSumScore = database.ref(
+          "/sumSore/" + this.user_Selected[i].uid + "/"
+        );
+        var keyUser = "";
+        dataRefSumScore.on("child_added", (snapshot) => {
+          this.dataSumScore = snapshot.val();
+          keyUser = snapshot.key;
+        });
+        database
+          .ref("/sumSore/" + this.user_Selected[i].uid + "/" + keyUser)
+          .set({
+            max:
+              this.dataSumScore.max +
+              this.user_Selected[i].set +
+              this.user_Selected[i].spikes +
+              this.user_Selected[i].blocks +
+              this.user_Selected[i].digs +
+              this.user_Selected[i].aces,
+            maxSet: this.dataSumScore.maxSet + this.user_Selected[i].set,
+            maxSpikes:
+              this.dataSumScore.maxSpikes + this.user_Selected[i].spikes,
+            maxBlocks:
+              this.dataSumScore.maxBlocks + this.user_Selected[i].blocks,
+            maxDigs: this.dataSumScore.maxDigs + this.user_Selected[i].digs,
+            maxAces: this.dataSumScore.maxAces + this.user_Selected[i].aces,
+          });
+        console.log("sumSore");
+      }
+    },
   },
 };
 </script>

@@ -23,6 +23,6 @@ export default {};
 
 <style>
 li{
-    padding: 16px;
+    padding: 10px;
 }
 </style>

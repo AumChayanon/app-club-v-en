@@ -3,7 +3,7 @@
 
     <div class="row" v-for="item in data" :key="item.id">
       <br />
-      <p>{{item[0].date}}</p>
+      <h6>set: {{ item[0].setNumber }} <b v-if="item[0].statusScore === 'win'" style="color:#a2b54d;">{{ item[0].statusScore }}</b> <b  v-if="item[0].statusScore === 'lose'" style="color:#CC0000;">{{ item[0].statusScore }}</b> score: {{ item[0].scoreMe }}:{{ item[0].scoreHis }}  ({{ item[0].date }})</h6>
       <div class="row" id="divHis" v-for="index in item" :key="index.id">
         <div class="col" style="max-width:20%;">
           <img
@@ -58,7 +58,10 @@ export default {
   components:{
     Carousel,
     Slide,
-  }
+  },
+  created() {
+    console.log("data",this.data);
+  },
 }
 </script>
 
